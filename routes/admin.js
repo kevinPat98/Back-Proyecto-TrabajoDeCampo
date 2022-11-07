@@ -9,6 +9,7 @@ var multiparty = require('connect-multiparty');
 var path = multiparty({uploadDir: './uploads/productos'});
 
 api.post('/login_admin',AdminController.login_admin);
+api.post('/registro_admin', AdminController.registro_admin);
 api.get('/listar_etiquetas_admin',auth.auth,AdminController.listar_etiquetas_admin);
 api.delete('/eliminar_etiqueta_admin/:id',auth.auth,AdminController.eliminar_etiqueta_admin);
 api.post('/agregar_etiqueta_admin',auth.auth,AdminController.agregar_etiqueta_admin);
