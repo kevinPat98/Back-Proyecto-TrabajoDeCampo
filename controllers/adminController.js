@@ -45,35 +45,6 @@ const login_admin = async function(req,res){
     } 
 }
 
-registro_admin = async function(req,res){
-    let data = req.body;
-    var admins_arr = [];
-
-    admins_arr = await Admin.find({email:data.email});
-
-    if(admins_arr.length == 0){
-        if(data.password){
-            bcrypt.hash(data.password,null,null, async function(err,hash){
-                if(hash){
-                    data.dni = '';
-                    data.password = hash;
-                    var reg = await Admin.create(data);
-                    res.status(200).send({data:reg});
-                }else{
-                    res.status(200).send({message:'ErrorServer',data:undefined});
-                }
-            })
-        }else{
-            res.status(200).send({message:'No hay una contraseña',data:undefined});
-        }
-
-        
-    }else{
-        res.status(200).send({message:'El correo ya existe, intente con otro.',data:undefined});
-    }
-}
-
-
 const listar_etiquetas_admin = async function(req,res){
     if(req.user){
         var reg = await Etiqueta.find();
@@ -834,7 +805,6 @@ const enviar_orden_compra = async function(venta){
 }
 
 module.exports = {
-    registro_admin,
     login_admin,
     eliminar_etiqueta_admin,
     listar_etiquetas_admin,
